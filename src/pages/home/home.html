@@ -1,14 +1,73 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color='#32db64'>
     <ion-title>
-      Ionic Blank
+      Proyecto Ucla
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-segment [(ngModel)]="segmentB"  >
+        <ion-segment-button value="test1">
+            <div class="margen-segment">
+                P(X<x)
+            </div>
+        </ion-segment-button>
+    
+        <ion-segment-button value="test2">
+            <div class="margen-segment">
+                P(a<X<b)
+            </div>
+        </ion-segment-button>
+        <ion-segment-button value="test3">
+            <div class="margen-segment">
+              Tabla normal 
+            </div>
+        </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="segmentB">
+    <ion-list *ngSwitchCase="'test1'">
+      <p>
+      Introduce el valor del intervalo 
+      </p>
+          <ion-list>
+  <ion-list radio-group>
+  <ion-list-header>
+  Metodo de Integracion
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Simpsom</ion-label>
+    <ion-radio checked="true" value="go"></ion-radio>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Trapecio</ion-label>
+    <ion-radio value="rust"></ion-radio>
+  </ion-item>
+
+
+</ion-list>
+</ion-list>
+    <ion-item>
+
+    <ion-label position="stacked">Valor a:</ion-label>
+    <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Valor b:</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <button ion-button color="primary">Primary</button>
+    <ion-label color="primary">Resultado :</ion-label>
+
+  </ion-list>
+    <ion-list *ngSwitchCase="'test2'"><ion-item>Contenido del segmento 2</ion-item></ion-list>
+    <ion-list *ngSwitchCase="'test3'"><ion-item>Contenido del segmento 3</ion-item></ion-list>
+  </div>
+      <p>
+      Este proyecto esta desarrollado en ionic y realiza sus calculos 
+      por medio de un backend desarrollado en R
+      </p>
 </ion-content>
