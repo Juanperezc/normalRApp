@@ -1,2 +1,2 @@
 # normalRApp
-app for normal R proyect
+Materia: Programacion numerica
