@@ -1,5 +1,7 @@
 {
   "name": "normalRApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

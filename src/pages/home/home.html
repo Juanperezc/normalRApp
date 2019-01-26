@@ -10,13 +10,13 @@
   <ion-segment [(ngModel)]="segmentB"  >
         <ion-segment-button value="test1">
             <div class="margen-segment">
-                P(X<x)
+                P(a<Z<b)
             </div>
         </ion-segment-button>
     
         <ion-segment-button value="test2">
             <div class="margen-segment">
-                P(a<X<b)
+                P(Z<x)  
             </div>
         </ion-segment-button>
         <ion-segment-button value="test3">
@@ -28,46 +28,237 @@
 
     <div [ngSwitch]="segmentB">
     <ion-list *ngSwitchCase="'test1'">
+   
+  <form [formGroup]="form1">
+  <ion-list formControlName="case"  required radio-group>
+    <ion-list-header>
+    <b>Metodo de integración</b>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label><b>Simpson</b></ion-label>
+      <ion-radio value="simpson" ></ion-radio>
+    </ion-item>
+ <ion-list formControlName="caset" *ngIf='form1.value["case"] == "simpson"'required radio-group>
+    <ion-list-header>
+    Escoge el tipo de simpson
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>1/3(solo pares)</ion-label>
+      <ion-radio value="1" ></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>3/8(python)</ion-label>
+      <ion-radio value="2"></ion-radio>
+    </ion-item>
+
+
+    </ion-list>
+    <ion-item>
+      <ion-label><b>Trapecio</b></ion-label>
+      <ion-radio value="trapecio"></ion-radio>
+    </ion-item>
+
+
+    </ion-list>
       <p>
       Introduce el valor del intervalo 
       </p>
-          <ion-list>
-  <ion-list radio-group>
-  <ion-list-header>
-  Metodo de Integracion
-  </ion-list-header>
-
-  <ion-item>
-    <ion-label>Simpsom</ion-label>
-    <ion-radio checked="true" value="go"></ion-radio>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Trapecio</ion-label>
-    <ion-radio value="rust"></ion-radio>
-  </ion-item>
-
-
-</ion-list>
-</ion-list>
     <ion-item>
-
-    <ion-label position="stacked">Valor a:</ion-label>
-    <ion-input></ion-input>
+    <ion-label position="stacked">Limite inferior:</ion-label>
+    <ion-input type="number" step="0.01" min="-3" max="3" placeholder="0.00"[class.invalid]="!form1.controls.valora.valid && (form1.controls.valora.dirty || submitAttempt1)" formControlName="valora"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Valor b:</ion-label>
-      <ion-input></ion-input>
+      <ion-label position="stacked">Limite superior:</ion-label>
+      <ion-input type="number" step="0.01" min="-3" max="3" placeholder="0.00"[class.invalid]="!form1.controls.valorb.valid && (form1.controls.valorb.dirty || submitAttempt1)" formControlName="valorb"></ion-input>
     </ion-item>
-    <button ion-button color="primary">Primary</button>
-    <ion-label color="primary">Resultado :</ion-label>
-
+     <ion-item>
+      <ion-label position="stacked">Numero de tramos:</ion-label>
+      <ion-input type="number" maxlength="3" min="0" max="400" placeholder="0.00"[class.invalid]="!form1.controls.valorn.valid && (form1.controls.valorn.dirty || submitAttempt1)" formControlName="valorn"></ion-input>
+    </ion-item>
+ <ion-item>    <button ion-button (click)='calcularAB()'color="primary"> Calcular </button> </ion-item>
+    <ion-label color="primary">Resultado : {{res1}} </ion-label>
+  </form>
   </ion-list>
-    <ion-list *ngSwitchCase="'test2'"><ion-item>Contenido del segmento 2</ion-item></ion-list>
-    <ion-list *ngSwitchCase="'test3'"><ion-item>Contenido del segmento 3</ion-item></ion-list>
+
+<!-- -->
+    <ion-list *ngSwitchCase="'test2'">
+    
+      
+  <form [formGroup]="form2">
+  <ion-list formControlName="case" required radio-group>
+    <ion-list-header>
+    Metodo de integración
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label><b>Simpson</b></ion-label>
+      <ion-radio value="simpson" ></ion-radio>
+    </ion-item>
+<ion-list formControlName="caset" *ngIf='form2.value["case"] == "simpson"'required radio-group>
+    <ion-list-header>
+    Escoge el tipo de simpson
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>1/3(solo pares)</ion-label>
+      <ion-radio value="1" ></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>3/8(python)</ion-label>
+      <ion-radio value="2"></ion-radio>
+    </ion-item>
+
+
+    </ion-list>
+    <ion-item>
+      <ion-label><b>Trapecio</b></ion-label>
+      <ion-radio value="trapecio"></ion-radio>
+    </ion-item>
+  </ion-list>
+    <p>
+      Introduce el valor del x
+      </p>
+  <ion-item>
+  <ion-label position="stacked">Valor x:</ion-label>
+  <ion-input type="number" step="0.01" min="-3" max="3" placeholder="0.00"[class.invalid]="!form2.controls.valorx.valid && (form2.controls.valorx.dirty || submitAttempt2)" formControlName="valorx"></ion-input>
+  </ion-item>
+       <ion-item>
+      <ion-label position="stacked">Numero de tramos:</ion-label>
+      <ion-input type="number" maxlength="3" min="0" max="400" placeholder="0.00"[class.invalid]="!form2.controls.valorn.valid && (form2.controls.valorn.dirty || submitAttempt1)" formControlName="valorn"></ion-input>
+    </ion-item>
+  <ion-item>
+  <button ion-button (click)='calcularAcumulada()'color="primary">Calcular</button>
+  </ion-item>
+
+  <ion-item>
+   <ion-label color="primary">Resultado : {{res2}}</ion-label>
+  </ion-item>
+  </form>
+    
+    </ion-list>
+    
+    
+    
+    
+    <ion-list *ngSwitchCase="'test3'"><ion-item>
+    
+     
+<ion-item>
+  <button ion-button (click)='normalTable()'color="primary">Calcular</button>
+  </ion-item>
+     <p>
+      Normal valores positivos
+      </p>
+<ion-grid no-padding class="home-gallery">
+       <ion-row class='normal-head'>
+       <ion-col>
+             Z
+       </ion-col>
+       <ion-col >
+             0.0
+       </ion-col>
+         <ion-col>
+             0.1
+       </ion-col>
+         <ion-col>
+             0.2
+       </ion-col>
+         <ion-col>
+             0.3
+       </ion-col>
+         <ion-col>
+             0.4
+       </ion-col>
+         <ion-col>
+             0.5
+       </ion-col>
+         <ion-col>
+             0.6
+       </ion-col>
+         <ion-col>
+             0.7
+       </ion-col>
+         <ion-col>
+             0.8
+       </ion-col>
+         <ion-col>
+             0.9
+       </ion-col>
+
+      </ion-row>
+    <ion-row *ngFor="let row of normal; let i = index" >
+        <ion-col>
+            {{(i/10).toFixed(1) }}
+       </ion-col>
+        <ion-col *ngFor="let item of row">
+              {{item.toFixed(4)}}
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+   <br>
+      <br>
+      
+      <p>
+      Normal valores negativos
+      </p>
+<ion-grid no-padding class="home-gallery">
+       <ion-row class='normal-head'>
+       <ion-col>
+             Z
+       </ion-col>
+       <ion-col >
+             0.0
+       </ion-col>
+         <ion-col>
+             0.1
+       </ion-col>
+         <ion-col>
+             0.2
+       </ion-col>
+         <ion-col>
+             0.3
+       </ion-col>
+         <ion-col>
+             0.4
+       </ion-col>
+         <ion-col>
+             0.5
+       </ion-col>
+         <ion-col>
+             0.6
+       </ion-col>
+         <ion-col>
+             0.7
+       </ion-col>
+         <ion-col>
+             0.8
+       </ion-col>
+         <ion-col>
+             0.9
+       </ion-col>
+
+      </ion-row>
+
+   
+    <ion-row *ngFor="let row of normaln; let i = index" >
+        <ion-col>
+            {{((i/10) - 3).toFixed(1)}}
+       </ion-col>
+        <ion-col *ngFor="let item of row">
+              {{item.toFixed(4)}}
+        </ion-col>
+    </ion-row>
+</ion-grid>
+    </ion-item></ion-list>
   </div>
       <p>
       Este proyecto esta desarrollado en ionic y realiza sus calculos 
-      por medio de un backend desarrollado en R
+      por medio de un backend desarrollado en Nodejs con integraciónes de R y python
+      (Es necesario disponer de internet para realizar los calculos)
       </p>
 </ion-content>
